@@ -18,6 +18,7 @@ namespace Alura.LeilaoOnline.Tests
             //Dado leilão com 3 clientes e lances realizados por eles
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
+            leilao.IniciaPregao();
 
             foreach(var of in ofertas)
             {
@@ -39,6 +40,7 @@ namespace Alura.LeilaoOnline.Tests
         {
             //Arrange
             var leilao = new Leilao("Van Gogh");
+            leilao.IniciaPregao();
 
             //Act - método sendo testado
             leilao.TerminaPregao();

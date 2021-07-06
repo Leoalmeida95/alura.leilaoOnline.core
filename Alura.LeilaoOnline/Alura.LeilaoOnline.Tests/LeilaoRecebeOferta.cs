@@ -15,6 +15,7 @@ namespace Alura.LeilaoOnline.Tests
             //Arrange
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
+            leilao.IniciaPregao();
             leilao.RecebeLance(fulano, 700);
             leilao.RecebeLance(fulano, 800);
             leilao.TerminaPregao();
