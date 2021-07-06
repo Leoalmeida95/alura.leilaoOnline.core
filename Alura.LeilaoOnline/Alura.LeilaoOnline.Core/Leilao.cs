@@ -28,7 +28,10 @@ namespace Alura.LeilaoOnline.Core
 
         public void TerminaPregao()
         {
-            Ganhador = Lances.OrderBy(lan => lan.Valor).Last();
+            Ganhador = Lances
+                        .DefaultIfEmpty(new Lance(null, 0))
+                        .OrderBy(lan => lan.Valor)
+                        .LastOrDefault();
         }
     }
 }

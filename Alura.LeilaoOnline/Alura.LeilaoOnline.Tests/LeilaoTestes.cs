@@ -8,98 +8,44 @@ namespace Alura.LeilaoOnline.Tests
 {
     public class LeilaoTestes
     {
-        [Fact]
-        public void LeilaoComTresClientesVerificandoGanhador()
+        [Theory]
+        [InlineData(1200, new double[] {800,900,1000,1200 })]
+        [InlineData(1000, new double[] { 800, 900, 1000, 990 })]
+        [InlineData(800, new double[] { 800 })]
+        public void LeilaoComVariosLances(double valorEsperado, double[] ofertas)
         {
-            //Arrange
+            //Arranje - cenário
+            //Dado leilão com 3 clientes e lances realizados por eles
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
-            var maria = new Interessada("Maria", leilao);
-            var beltrano = new Interessada("Beltrano", leilao);
-            int maiorLance = 1000;
 
-            leilao.RecebeLance(maria, 700);
-            leilao.RecebeLance(fulano, 800);
-            leilao.RecebeLance(maria, 850);
-            leilao.RecebeLance(fulano, 900);
-            leilao.RecebeLance(beltrano, maiorLance);
+            foreach(var of in ofertas)
+            {
+                leilao.RecebeLance(fulano, of);
+            }
 
             //Act - método sendo testado
+            //Quando o pregão/leilão termina
             leilao.TerminaPregao();
 
-            var valorEsperado = maiorLance;
-            var clienteEsperado = beltrano;
             //Assert
+            //Então o valor esperado é o maior valor lançado
+            //e o cliente ganhador é o que deu maior lance
             Assert.Equal(valorEsperado, leilao.Ganhador.Valor);
-            Assert.Equal(clienteEsperado, leilao.Ganhador.Cliente);
         }
 
         [Fact]
-        public void LeilaoComLancesOrdenadosPorValor()
+        public void LeilaoSemLances()
         {
             //Arrange
             var leilao = new Leilao("Van Gogh");
-            var fulano = new Interessada("Fulano", leilao);
-            var maria = new Interessada("Maria", leilao);
-            int maiorLance = 1000;
-
-            leilao.RecebeLance(maria, 700);
-            leilao.RecebeLance(fulano, 800);
-            leilao.RecebeLance(fulano, 900);
-            leilao.RecebeLance(maria, maiorLance);
 
             //Act - método sendo testado
             leilao.TerminaPregao();
 
-            var valorObtido = leilao.Ganhador.Valor;
-            var valorEsperado = maiorLance;
-
             //Assert
-            Assert.Equal(valorEsperado, valorObtido);
-        }
-
-        [Fact]
-        public void LeilaoComVariosLances()
-        {
-            //Arrange
-            var leilao = new Leilao("Van Gogh");
-            var fulano = new Interessada("Fulano", leilao);
-            var maria = new Interessada("Maria", leilao);
-            int maiorLance = 1000;
-
-            leilao.RecebeLance(maria, 700);
-            leilao.RecebeLance(fulano, 800);
-            leilao.RecebeLance(maria, maiorLance);
-            leilao.RecebeLance(fulano, 900);
-
-            //Act - método sendo testado
-            leilao.TerminaPregao();
-
-            var valorObtido = leilao.Ganhador.Valor;
-            var valorEsperado = maiorLance;
-
-            //Assert
-            Assert.Equal(valorEsperado, valorObtido);
-        }
-
-        [Fact]
-        public void LeilaoComUmLance()
-        {
-            //Arrange
-            var leilao = new Leilao("Van Gogh");
-            var fulano = new Interessada("Fulano", leilao);
-            int maiorLance = 800;
-   
-            leilao.RecebeLance(fulano, maiorLance);
-
-            //Act - método sendo testado
-            leilao.TerminaPregao();
-
-            var valorObtido = leilao.Ganhador.Valor;
-            var valorEsperado = maiorLance;
-
-            //Assert
-            Assert.Equal(valorEsperado, valorObtido);
+            var valorEsperado = 0;
+            Assert.Equal(valorEsperado, leilao.Ganhador.Valor);
         }
     }
 }
