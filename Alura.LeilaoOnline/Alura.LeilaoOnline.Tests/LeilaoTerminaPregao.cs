@@ -1,4 +1,4 @@
-﻿using Alura.LeilaoOnline.Core;
+﻿using Alura.LeilaoOnline.Core.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,13 +6,13 @@ using Xunit;
 
 namespace Alura.LeilaoOnline.Tests
 {
-    public class LeilaoTestes
+    public class LeilaoTerminaPregao
     {
         [Theory]
         [InlineData(1200, new double[] {800,900,1000,1200 })]
         [InlineData(1000, new double[] { 800, 900, 1000, 990 })]
         [InlineData(800, new double[] { 800 })]
-        public void LeilaoComVariosLances(double valorEsperado, double[] ofertas)
+        public void RetornaMaiorValorQuandoLeilaoComPeloMenosUmLance(double valorEsperado, double[] ofertas)
         {
             //Arranje - cenário
             //Dado leilão com 3 clientes e lances realizados por eles
@@ -35,7 +35,7 @@ namespace Alura.LeilaoOnline.Tests
         }
 
         [Fact]
-        public void LeilaoSemLances()
+        public void RetornaZeroQuandoLeilaoSemLances()
         {
             //Arrange
             var leilao = new Leilao("Van Gogh");
