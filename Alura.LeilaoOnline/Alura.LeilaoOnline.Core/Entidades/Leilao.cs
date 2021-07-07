@@ -1,4 +1,5 @@
 ﻿using Alura.LeilaoOnline.Core.Enums;
+using Alura.LeilaoOnline.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,19 @@ namespace Alura.LeilaoOnline.Core.Entidades
     public class Leilao
     {
         private IList<Lance> _lances;
+        private IModalidadeAvaliacao _avaliador;
+
         public IEnumerable<Lance> Lances => _lances;
         public string Peca { get; }
         public Lance Ganhador { get; private set; }
         public EstadoLeilaoEnum Estado { get; set; }
-        public double ValorDestino { get; }
 
-        public Leilao(string peca, double valorDestino = 0)
+        public Leilao(string peca, IModalidadeAvaliacao avaliador)
         {
             Peca = peca;
             _lances = new List<Lance>();
             Estado = EstadoLeilaoEnum.LeilaoAntesDoPregao;
-            ValorDestino = valorDestino;
+            _avaliador = avaliador;
         }
 
         public void RecebeLance(Interessada cliente, double valor)
@@ -37,22 +39,7 @@ namespace Alura.LeilaoOnline.Core.Entidades
         {
             if (Estado != EstadoLeilaoEnum.LeilaoEmAndamento) throw new InvalidOperationException("O Leilão não foi iniciado");
 
-            if (ValorDestino > 0)
-            {
-                Ganhador = Lances
-                            .DefaultIfEmpty(new Lance(null, 0))
-                            .Where(l => l.Valor > ValorDestino)
-                            .OrderBy(lan => lan.Valor)
-                            .FirstOrDefault();
-            }
-            else
-            {
-                Ganhador = Lances
-                            .DefaultIfEmpty(new Lance(null, 0))
-                            .OrderBy(lan => lan.Valor)
-                            .LastOrDefault();
-            }
-
+            Ganhador = _avaliador.Avalia(this);
             Estado = EstadoLeilaoEnum.LeilaoFinalizado;
         }
 

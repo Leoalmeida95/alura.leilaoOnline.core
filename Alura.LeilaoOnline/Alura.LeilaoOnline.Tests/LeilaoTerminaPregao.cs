@@ -1,4 +1,5 @@
 ﻿using Alura.LeilaoOnline.Core.Entidades;
+using Alura.LeilaoOnline.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaValorSuperiorMaisProximoQuandoLeilaoNessaModalidade(double valorDestino, double valorEsperado, double[] ofertas)
         {
             //Arranje - cenário
-            var leilao = new Leilao("Van Gogh", valorDestino);
+            var modalidade = new OfertaSuperiorMaisProxima(valorDestino);
+            var leilao = new Leilao("Van Gogh", modalidade);
             var fulano = new Interessada("Fulano", leilao);
             var leo = new Interessada("Leo", leilao);
 
@@ -42,7 +44,8 @@ namespace Alura.LeilaoOnline.Tests
         {
             //Arranje - cenário
             //Dado leilão com 3 clientes e lances realizados por eles
-            var leilao = new Leilao("Van Gogh");
+            var modalidade = new MaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
             var fulano = new Interessada("Fulano", leilao);
             var leo = new Interessada("Leo", leilao);
 
@@ -70,7 +73,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaZeroQuandoLeilaoSemLances()
         {
             //Arrange
-            var leilao = new Leilao("Van Gogh");
+            var modalidade = new MaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
             leilao.IniciaPregao();
 
             //Act - método sendo testado
@@ -85,7 +89,8 @@ namespace Alura.LeilaoOnline.Tests
         public void LancaInvalidOperationExceptionQuandoPregaoNaoIniciado()
         {
             //Arrange
-            var leilao = new Leilao("Van Gogh");
+            var modalidade = new MaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
 
             //Assert
             var excecaoObtida = Assert.Throws<InvalidOperationException>(
