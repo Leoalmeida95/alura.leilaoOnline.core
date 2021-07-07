@@ -12,12 +12,14 @@ namespace Alura.LeilaoOnline.Core.Entidades
         public string Peca { get; }
         public Lance Ganhador { get; private set; }
         public EstadoLeilaoEnum Estado { get; set; }
+        public double ValorDestino { get; }
 
-        public Leilao(string peca)
+        public Leilao(string peca, double valorDestino = 0)
         {
             Peca = peca;
             _lances = new List<Lance>();
             Estado = EstadoLeilaoEnum.LeilaoAntesDoPregao;
+            ValorDestino = valorDestino;
         }
 
         public void RecebeLance(Interessada cliente, double valor)
@@ -35,11 +37,23 @@ namespace Alura.LeilaoOnline.Core.Entidades
         {
             if (Estado != EstadoLeilaoEnum.LeilaoEmAndamento) throw new InvalidOperationException("O Leilão não foi iniciado");
 
+            if (ValorDestino > 0)
+            {
+                Ganhador = Lances
+                            .DefaultIfEmpty(new Lance(null, 0))
+                            .Where(l => l.Valor > ValorDestino)
+                            .OrderBy(lan => lan.Valor)
+                            .FirstOrDefault();
+            }
+            else
+            {
+                Ganhador = Lances
+                            .DefaultIfEmpty(new Lance(null, 0))
+                            .OrderBy(lan => lan.Valor)
+                            .LastOrDefault();
+            }
+
             Estado = EstadoLeilaoEnum.LeilaoFinalizado;
-            Ganhador = Lances
-                        .DefaultIfEmpty(new Lance(null, 0))
-                        .OrderBy(lan => lan.Valor)
-                        .LastOrDefault();
         }
 
         private bool NovoLanceAceito(Interessada cliente, double valor)
