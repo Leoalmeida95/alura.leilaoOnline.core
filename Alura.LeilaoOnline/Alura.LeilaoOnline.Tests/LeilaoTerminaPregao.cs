@@ -18,11 +18,16 @@ namespace Alura.LeilaoOnline.Tests
             //Dado leilão com 3 clientes e lances realizados por eles
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
+            var leo = new Interessada("Leo", leilao);
+
             leilao.IniciaPregao();
 
-            foreach(var of in ofertas)
+            for(int i=0; i < ofertas.Length; i++)
             {
-                leilao.RecebeLance(fulano, of);
+                if (i % 2 == 0)
+                    leilao.RecebeLance(fulano, ofertas[i]);
+                else
+                    leilao.RecebeLance(leo, ofertas[i]);
             }
 
             //Act - método sendo testado

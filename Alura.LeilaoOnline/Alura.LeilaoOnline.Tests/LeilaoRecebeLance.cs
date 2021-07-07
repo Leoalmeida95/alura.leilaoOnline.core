@@ -15,9 +15,10 @@ namespace Alura.LeilaoOnline.Tests
             //Arrange
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
+            var ciclano = new Interessada("Ciclano", leilao);
             leilao.IniciaPregao();
             leilao.RecebeLance(fulano, 700);
-            leilao.RecebeLance(fulano, 800);
+            leilao.RecebeLance(ciclano, 800);
             leilao.TerminaPregao();
 
             //Act - método sendo testado
@@ -26,6 +27,25 @@ namespace Alura.LeilaoOnline.Tests
             //Assert
             var valorEsperado = 2;
             Assert.Equal(valorEsperado, leilao.Lances.Count());
+        }
+
+        [Fact]
+        public void NaoAceitaLancesConsecutivosDoMesmoInteressado()
+        {
+            //Arrange
+            var leilao = new Leilao("Van Gogh");
+            var fulano = new Interessada("Fulano", leilao);
+            leilao.IniciaPregao();
+
+            leilao.RecebeLance(fulano, 700);
+
+            //Act - método sendo testado
+            leilao.RecebeLance(fulano, 1000);
+
+            leilao.TerminaPregao();
+            //Assert
+            var qtdEsperada = 1;
+            Assert.Equal(qtdEsperada, leilao.Lances.Count());
         }
     }
 }

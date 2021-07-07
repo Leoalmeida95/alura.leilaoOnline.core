@@ -21,7 +21,9 @@ namespace Alura.LeilaoOnline.Core.Entidades
 
         public void RecebeLance(Interessada cliente, double valor)
         {
-            if (Estado == EstadoLeilaoEnum.LeilaoEmAndamento) _lances.Add(new Lance(cliente, valor));
+            if (Estado == EstadoLeilaoEnum.LeilaoEmAndamento && 
+                (_lances.Count == 0 || cliente != _lances.Last().Cliente))
+                _lances.Add(new Lance(cliente, valor));
         }
 
         public void IniciaPregao()
