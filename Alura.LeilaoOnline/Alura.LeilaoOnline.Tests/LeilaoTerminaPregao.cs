@@ -9,7 +9,7 @@ namespace Alura.LeilaoOnline.Tests
     public class LeilaoTerminaPregao
     {
         [Theory]
-        [InlineData(1200, new double[] {800,900,1000,1200 })]
+        [InlineData(1200, new double[] { 800, 900, 1000, 1200 })]
         [InlineData(1000, new double[] { 800, 900, 1000, 990 })]
         [InlineData(800, new double[] { 800 })]
         public void RetornaMaiorValorQuandoLeilaoComPeloMenosUmLance(double valorEsperado, double[] ofertas)
@@ -22,7 +22,7 @@ namespace Alura.LeilaoOnline.Tests
 
             leilao.IniciaPregao();
 
-            for(int i=0; i < ofertas.Length; i++)
+            for (int i = 0; i < ofertas.Length; i++)
             {
                 if (i % 2 == 0)
                     leilao.RecebeLance(fulano, ofertas[i]);
@@ -53,6 +53,22 @@ namespace Alura.LeilaoOnline.Tests
             //Assert
             var valorEsperado = 0;
             Assert.Equal(valorEsperado, leilao.Ganhador.Valor);
+        }
+
+        [Fact]
+        public void LancaInvalidOperationExceptionQuandoPregaoNaoIniciado()
+        {
+            //Arrange
+            var leilao = new Leilao("Van Gogh");
+
+            //Assert
+            var excecaoObtida = Assert.Throws<InvalidOperationException>(
+                //Act - método sendo testado
+                () => leilao.TerminaPregao()
+                );
+
+            var messageEsperada = "O Leilão não foi iniciado";
+            Assert.Equal(messageEsperada, excecaoObtida.Message);
         }
     }
 }

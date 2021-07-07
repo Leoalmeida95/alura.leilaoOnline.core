@@ -1,4 +1,5 @@
 ﻿using Alura.LeilaoOnline.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,8 +22,7 @@ namespace Alura.LeilaoOnline.Core.Entidades
 
         public void RecebeLance(Interessada cliente, double valor)
         {
-            if (Estado == EstadoLeilaoEnum.LeilaoEmAndamento && 
-                (_lances.Count == 0 || cliente != _lances.Last().Cliente))
+            if (NovoLanceAceito(cliente, valor))
                 _lances.Add(new Lance(cliente, valor));
         }
 
@@ -33,11 +33,18 @@ namespace Alura.LeilaoOnline.Core.Entidades
 
         public void TerminaPregao()
         {
+            if (Estado != EstadoLeilaoEnum.LeilaoEmAndamento) throw new InvalidOperationException("O Leilão não foi iniciado");
+
             Estado = EstadoLeilaoEnum.LeilaoFinalizado;
             Ganhador = Lances
                         .DefaultIfEmpty(new Lance(null, 0))
                         .OrderBy(lan => lan.Valor)
                         .LastOrDefault();
+        }
+
+        private bool NovoLanceAceito(Interessada cliente, double valor)
+        {
+            return (Estado == EstadoLeilaoEnum.LeilaoEmAndamento && (_lances.Count == 0 || cliente != _lances.Last().Cliente));
         }
     }
 }
