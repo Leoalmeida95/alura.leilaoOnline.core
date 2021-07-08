@@ -1,0 +1,38 @@
+﻿@model EstadoLeilao
+
+@{
+    LeilaoViewModel leilao = ViewData["Leilao"] as LeilaoViewModel;
+    Lance ultimoLance = leilao.Lances.OrderByDescending(l => l.Valor).FirstOrDefault();
+    double valorUltimoLance = ultimoLance != null ? ultimoLance.Valor : 0.0;
+    Usuario usuarioLogado = ViewData["UsuarioLogado"] as Usuario;
+    TimeSpan terminaEm = DateTime.Now - leilao.InicioPregao;
+    LanceViewModel lanceModel = null;
+    if (usuarioLogado != null)
+    {
+        lanceModel = new LanceViewModel
+        {
+            LeilaoId = leilao.Id,
+            UsuarioLogadoId = usuarioLogado.Id,
+            Valor = valorUltimoLance
+        };
+    }
+}
+
+<div class="card estado">
+    <div class="yellow darken-4 white-text center-align">
+        <h4>
+            <i class="fas fa-hourglass-half"></i>
+        </h4>
+        <h5>@Model.ParaTexto()</h5>
+        <p>Termina em @terminaEm.Humanize().</p>
+    </div>
+    <div class="center-align yellow-text text-darken-4">
+        <h6>Lance Atual</h6>
+        <h5 id="lanceAtual">
+            @valorUltimoLance.ToString("C", CultureInfo.CurrentCulture)</h5>
+        @if (lanceModel != null)
+        {
+            <partial name="_ModalLance" model="lanceModel" />
+        }
+    </div>
+</div>

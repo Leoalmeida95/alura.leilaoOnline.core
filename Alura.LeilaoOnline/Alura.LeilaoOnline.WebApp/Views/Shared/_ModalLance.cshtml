@@ -1,0 +1,9 @@
+﻿@model LanceViewModel
+<form id="formDarLance" asp-controller="Interessadas" asp-action="OfertaLance">
+    <input type="hidden" asp-for="LeilaoId" />
+    <input type="hidden" asp-for="UsuarioLogadoId" />
+    <input class="browser-default input-lance" asp-for="Valor" min="0"/>
+    <button id="btnDarLance" class="btn waves-effect waves-light yellow darken-4 btn-flat white-text">
+        Dar Lance
+    </button>
+</form>

@@ -1,24 +1,23 @@
-﻿using Alura.LeilaoOnline.Core.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Alura.LeilaoOnline.Core;
 using Xunit;
 
 namespace Alura.LeilaoOnline.Tests
 {
+    [Trait("Tipo", "Unidade")]
     public class LanceCtor
     {
         [Fact]
-        public void LancaArgumentExceptionQuandoValorNegativo()
+        public void LancaArgumentExceptionDadoValorNegativo()
         {
             //Arranje
             var valorNegativo = -100;
 
             //Assert
-            Assert.Throws<ArgumentException>(
-                //Act - método sendo testado
+            Assert.Throws<System.ArgumentException>(
+                //Act
                 () => new Lance(null, valorNegativo)
-                );
+            );
         }
+
     }
 }

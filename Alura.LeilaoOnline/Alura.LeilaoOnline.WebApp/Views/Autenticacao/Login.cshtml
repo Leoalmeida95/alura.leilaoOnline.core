@@ -1,0 +1,59 @@
+﻿@model Alura.LeilaoOnline.WebApp.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form {
+            width: 300px;
+        }
+    </style>
+</head>
+<body class="grey lighten-4">
+
+    <form class="card-panel" asp-action="Login" asp-controller="Autenticacao">
+        <h6 class="brand-logo center-align"><span>Leilões</span><span> online</span></h6>
+        <h5>
+            <i class="material-icons left">person</i>
+            Login
+        </h5>
+        <div class="input-field">
+            <input asp-for="Login" class="validate" />
+            <label asp-for="Login"></label>
+            <span class="helper-text msg-erro" asp-validation-for="Login"></span>
+        </div>
+        <!--div.input-field login-->
+        <div class="input-field">
+            <input asp-for="Password" class="validate" />
+            <label asp-for="Password"></label>
+            <span class="helper-text msg-erro" asp-validation-for="Password"></span>
+        </div>
+        <!--div.input-field password-->
+        <button id="btnLogin" class="btn waves-effect waves-light z-depth-0">Login</button>
+        <p>Ainda não possui cadastro? <a href="#!">Registre-se</a>!</p>
+    </form>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/materialize.js"></script>
+    <script src="~/js/init.js"></script>
+</body>
+</html>

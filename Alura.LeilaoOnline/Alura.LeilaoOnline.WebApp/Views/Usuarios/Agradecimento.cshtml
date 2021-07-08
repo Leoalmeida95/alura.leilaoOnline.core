@@ -1,0 +1,58 @@
+﻿@model Alura.LeilaoOnline.WebApp.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="grey lighten-4">
+
+    <section class="section section-agradecimento">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <div class="card-panel">
+                        <h5 class="brand-logo center-align"><span>Leilões</span><span> online</span></h5>
+                        <h4>Obrigado por se registrar!</h4>
+                        <p class="flow-text">
+                            Laoreet ac, aliquam sit amet justo nunc tempor, metus vel placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem nulla condimentum tempor mattis.
+                        </p>
+                        <h5>Próximos passos:</h5>
+                        <p>
+                            <i class="material-icons left medium">email</i>
+                            No seu aplicatico de email procure uma mensagem de registro@leiloesonline.com para confirmação do registro.
+                        </p>
+                        <p>
+                            <i class="material-icons left medium">lock</i>
+                            Clique no link de confirmação, faça o login e comece a dar seus lances!!
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="~/js/materialize.js"></script>
+    <script src="~/js/init.js"></script>
+</body>
+</html>

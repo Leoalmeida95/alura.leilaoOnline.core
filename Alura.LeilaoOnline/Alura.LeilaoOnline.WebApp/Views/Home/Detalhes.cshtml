@@ -1,0 +1,45 @@
+﻿@model Alura.LeilaoOnline.WebApp.Models.LeilaoViewModel
+@{
+    ViewData["Title"] = "Detalhes do Leilão";
+    var usuarioLogado = Context.Session.Get<Usuario>("usuarioLogado");
+    LanceViewModel lanceModel = null;
+    if (usuarioLogado != null)
+    {
+        lanceModel = new LanceViewModel
+        {
+            LeilaoId = Model.Id,
+            UsuarioLogadoId = usuarioLogado.Id
+        };
+    }
+}
+
+<div class="container">
+    <div class="row leilao" data-id="@Model.Id">
+        <div class="col s12 m7">
+            <div class="card imagens">
+                <div class="card-image">
+                    <img class="responsive-img" src="@Model.Imagem" />
+                </div>
+            </div>
+            <!--div.card-->
+        </div>
+        <!--div.imagens-->
+        <div class="col s12 m5">
+            <div class="card info">
+                <div class="card-content">
+                    <span class="card-title">@Model.Titulo</span>
+                    <p>@Model.Descricao</p>
+                </div>
+            </div>
+            <!--div.card.info-->
+        </div>
+        <!--div.info-->
+        <div class="col s12 m5">
+            @Html.DisplayFor(
+                l => l.Estado, 
+                Model.Estado.ToString(), "", 
+                new { Leilao = Model, UsuarioLogado = usuarioLogado })
+        </div>
+    </div>
+    <!--div.leilao-->
+</div>

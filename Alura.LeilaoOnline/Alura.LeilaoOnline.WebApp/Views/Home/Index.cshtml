@@ -1,0 +1,137 @@
+﻿@model IEnumerable<LeilaoViewModel>
+@{
+    ViewData["Title"] = "Leilões Online";
+    string categoria = ViewData["categoria"] as string;
+    Usuario usuarioLogado = Context.Session.Get<Usuario>("usuarioLogado");
+}
+
+<section class="section section-prox-leiloes">
+    <div class="container">
+        @if (string.IsNullOrWhiteSpace(categoria))
+        {
+            <h4>Próximos Leilões</h4>
+
+        }
+        else
+        {
+            <h4>Leilões da categoria @categoria</h4>
+        }
+        <div class="row">
+            @foreach (var leilao in Model)
+            {
+                <div class="col s12 m4">
+                    <div class="card hoverable" data-id="@leilao.Id">
+                        @if (usuarioLogado != null)
+                        {
+                            if (leilao.SendoSeguido)
+                            {
+                                <a href="#!" data-idLeilao="@leilao.Id" data-idInteressada="@usuarioLogado.Id" class="abandonar yellow-text text-darken-4">
+                                    <i class="material-icons">star</i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#!" data-idLeilao="@leilao.Id" data-idInteressada="@usuarioLogado.Id" class="seguir white-text">
+                                    <i class="material-icons">star_border</i>
+                                </a>
+                            }
+                        }
+                        <div class="card-image">
+                            <img src="@leilao.Imagem" class="responsive-img">
+                            <span class="card-title">@leilao.Titulo</span>
+
+                        </div>
+                        <div class="card-content">
+                            <p>@leilao.Descricao.Substring(0, 150)</p>
+                        </div>
+                        <div class="card-action">
+                            <a asp-action="Detalhes" asp-route-id="@leilao.Id">Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+<section class="section section-categ-leiloes brown lighten-5">
+    <div class="container">
+        <h4 class="center">Navegue pelas categorias de Leilão</h4>
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-content center-align">
+                        <h2 class="icon-block brown-text"><i class="material-icons">directions_car</i></h2>
+                        <h5>Carros e Caminhões</h5>
+                        <p class="light">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, laborum incidunt voluptatum accusantium repellendus numquam.
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a asp-controller="Home" asp-action="Categoria" asp-route-id="Automóveis">Descobrir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-content center-align">
+                        <h2 class="icon-block brown-text"><i class="material-icons">palette</i></h2>
+                        <h5>Pinturas e Esculturas</h5>
+                        <p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, laborum incidunt voluptatum accusantium repellendus numquam.</p>
+                    </div>
+                    <div class="card-action">
+                        <a asp-controller="Home" asp-action="categoria" asp-route-id="Arte e Pintura">Descobrir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-content center-align">
+                        <h2 class="icon-block brown-text"><i class="material-icons">grade</i></h2>
+                        <h5>Itens de Colecionador</h5>
+                        <p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, laborum incidunt voluptatum accusantium repellendus numquam.</p>
+                    </div>
+                    <div class="card-action">
+                        <a asp-controller="Home" asp-action="Categoria" asp-route-id="Item de Colecionador">Descobrir</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--section-categ-leiloes-->
+
+<section class="section section-registro white black-text">
+    <div class="container">
+        <h4 class="center">Registre-se para participar dos leilões!</h4>
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card-panel white-text brown darken-3">
+                    <p class="flow-text">Laoreet ac, aliquam sit amet justo nunc tempor, metus vel placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem nulla condimentum tempor.</p>
+                    <ul>
+                        <li>
+                            <i class="material-icons left medium">shopping_cart</i>
+                            <h6>
+                                Ut fusce varius nisl ac ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat.
+                            </h6>
+                        </li>
+                        <li>
+                            <i class="material-icons left medium">dashboard</i>
+                            <h6>
+                                Ut fusce varius nisl ac ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat.
+                            </h6>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <partial name="_Registro" model="new Alura.LeilaoOnline.WebApp.Models.RegistroViewModel()" />
+            </div>
+        </div>
+        <!--div.row-->
+    </div>
+    <!--div.container-->
+</section>
+<!--section-registro-->

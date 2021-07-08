@@ -1,0 +1,140 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+ nav ul a,
+ nav .brand-logo {
+   color: rgb(65, 60, 60);
+ }
+ 
+.brand-logo span:nth-child(1){
+  color: #444;
+}
+
+.brand-logo span:nth-child(2){
+  color: #26a69a;
+}
+
+.sidenav-trigger {
+  color: #26a69a;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+#meu-perfil>i {
+  display: inline-block;
+}
+
+.carousel, .carousel-item {
+  height: 400px !important;
+}
+
+.carousel-fixed-item {
+  background: rgba(0,0,0,.5);
+}
+
+.leilao>.imagem>img {
+    margin: 2.8rem 0 1.68rem 0;
+}
+
+.leiloes {
+    padding: 0 5px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.leiloes h4 {
+    padding-top: 5px;
+}
+
+#modalConfirmaDelLeilao form {
+    display: inline;
+}
+
+.card-action .pagination a {
+    margin-right: 0 !important;
+}
+
+.section-prox-leiloes .card-image img {
+    height: 180px !important;
+}
+
+.msg-erro {
+    color: red !important;
+}
+
+.section-registro i,
+.section-agradecimento i{
+    font-size: 2.8em !important;
+}
+
+.seguir,
+.abandonar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 99;
+}
+
+.estado {
+    display: flex;
+}
+
+.estado div {
+    padding: 10px;
+    flex-grow: 1;
+    width: 50%;
+}
+
+.estado h5 {
+    font-weight: 300;
+}
+
+.input-lance {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px 0;
+    font-size: 1.1em;
+    width: 60%;
+    background-color: rgba(0,0,0,.05);
+}

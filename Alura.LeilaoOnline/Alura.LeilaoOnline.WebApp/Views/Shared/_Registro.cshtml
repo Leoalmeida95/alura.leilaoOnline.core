@@ -1,0 +1,25 @@
+﻿@model Alura.LeilaoOnline.WebApp.Models.RegistroViewModel
+
+<form class="card-panel" asp-action="Registro" asp-controller="Usuarios">
+    <div class="input-field">
+        <input asp-for="Nome" />
+        <label asp-for="Nome"></label>
+        <span class="helper-text msg-erro" asp-validation-for="Nome"></span>
+    </div>
+    <div class="input-field">
+        <input asp-for="Email" />
+        <label asp-for="Email"></label>
+        <span class="helper-text msg-erro" asp-validation-for="Email"></span>
+    </div>
+    <div class="input-field">
+        <input asp-for="Password" />
+        <label asp-for="Password"></label>
+        <span class="helper-text msg-erro" asp-validation-for="Password"></span>
+    </div>
+    <div class="input-field">
+        <input asp-for="ConfirmPassword" />
+        <label asp-for="ConfirmPassword"></label>
+        <span class="helper-text msg-erro" asp-validation-for="ConfirmPassword"></span>
+    </div>
+    <button id="btnRegistro" class="btn waves-effect waves-light brown darken-3 z-depth-0">Registrar</button>
+</form>

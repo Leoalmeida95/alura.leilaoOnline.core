@@ -1,0 +1,171 @@
+﻿@model IEnumerable<Alura.LeilaoOnline.WebApp.Models.LeilaoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<div class="fixed-action-btn">
+    <a asp-controller="Leiloes" asp-action="Novo" class="btn-floating btn-large waves-effect waves-light">
+        <i class="material-icons">add</i>
+    </a>
+</div>*@
+
+<!-- Modal Structure -->
+<div id="modalConfirmaDelLeilao" class="modal">
+    <div class="modal-content">
+        <h4>Confirmação</h4>
+        <p>Tem certeza que deseja excluir o leilão?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="modal-close btn-flat">Não</a>
+        <form asp-action="Remove" asp-controller="Leiloes">
+            <input type="hidden" name="id" value="2" class="inline" />
+            <button class="modal-close waves-effect waves-green btn-flat">Sim</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8">
+            <!-- Tabela com os leilões cadastrados -->
+            <div class="card">
+                <div class="card-content">
+                    <h4 class="card-title">
+                        Leilões cadastrados no sistema
+                        <a asp-action="Novo" asp-controller="Leiloes" class="right red btn-small btn-floating waves-effect waves-light">
+                            <i class="material-icons">add</i>
+                        </a>
+
+                    </h4>
+                    <table class="highlight responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor Inicial</th>
+                                <th>Categoria</th>
+                                <th>Estado Atual</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var leilao in Model)
+                            {
+                                <tr>
+                                    <td>@leilao.Titulo</td>
+                                    <td>@leilao.ValorInicial</td>
+                                    <td>@leilao.Categoria</td>
+                                    <td>@leilao.Estado</td>
+                                    <td>
+                                        <a class="modal-trigger black-text" href="#modalConfirmaDelLeilao"><i class="material-icons">close</i></a>
+                                    </td>
+                                </tr>
+                            }
+                            @*<tr>
+                                <td>Réplica de pintura</td>
+                                <td>1.000,00</td>
+                                <td>Arte e Pintura</td>
+                                <td>Não iniciado</td>
+                                <td>
+                                    <a class="black-text" asp-controller="Leiloes" asp-action="Remove" asp-route-id="2"><i class="material-icons">close</i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Réplica de pintura</td>
+                                <td>1.000,00</td>
+                                <td>Arte e Pintura</td>
+                                <td>Não iniciado</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Réplica de pintura</td>
+                                <td>1.000,00</td>
+                                <td>Arte e Pintura</td>
+                                <td>Não iniciado</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Réplica de pintura</td>
+                                <td>1.000,00</td>
+                                <td>Arte e Pintura</td>
+                                <td>Não iniciado</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Réplica de pintura</td>
+                                <td>1.000,00</td>
+                                <td>Arte e Pintura</td>
+                                <td>Não iniciado</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Réplica de pintura</td>
+                                <td>1.000,00</td>
+                                <td>Arte e Pintura</td>
+                                <td>Não iniciado</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Réplica de pintura</td>
+                                <td>1.000,00</td>
+                                <td>Arte e Pintura</td>
+                                <td>Não iniciado</td>
+                                <td></td>
+                            </tr>*@
+                        </tbody>
+                    </table>
+                </div>
+                <!--card.content>table-->
+                <div class="card-action">
+                    @*<span>Mostrando 1 de 10 de 67 registros.</span>*@
+                    <ul class="pagination right-align">
+                        <li class="disabled">
+                            <a href="#!" class="grey-text text-lighten-2">
+                                <i class="material-icons">chevron_left</i>
+                            </a>
+                        </li>
+                        <li class="active waves-effect red">
+                            <a href="#!" class="white-text">1</a>
+                        </li>
+                        <li class="waves-effect">
+                            <a href="#!" class="grey-text">2</a>
+                        </li>
+                        <li class="waves-effect">
+                            <a href="#!" class="grey-text">3</a>
+                        </li>
+                        <li class="waves-effect">
+                            <a href="#!" class="grey-text">
+                                <i class="material-icons">chevron_right</i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!--ul.pagination-->
+                </div>
+            </div>
+            <!--div.card-->
+        </div>
+        <div class="col s12 m4">
+            <!-- Filtro rápido de leilões -->
+            <div class="card teal white-text">
+                <div class="card-content">
+                    <span class="card-title">
+                        <i class="material-icons left">search</i>
+                        Filtro
+                    </span>
+                    <ul class="collection with-header">
+                        <li class="collection-item collection-header teal darken-2 white-text">Categoria</li>
+                        <li class="collection-item teal white-text"><a href="#!">Automóveis</a></li>
+                        <li class="collection-item teal white-text"><a href="#!">Arte e Pintura</a></li>
+                        <li class="collection-item teal white-text"><a href="#!">Itens de Colecionador</a></li>
+                    </ul>
+                </div>
+                <!--div.card-content-->
+            </div>
+            <!--div.card filtro-->
+        </div>
+    </div>
+</div>
+
+
+
+

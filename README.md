@@ -1,5 +1,6 @@
 # Alura Leilão Online
-API NojdeJS com Express e Mongo DB rodando em container Docker
-
 ## Testes Automatizados
-Testes com xUnit, com práticas ágeis como TDD e Test Driven Development
+Testes unitários com xUnit, com práticas ágeis como TDD e Test Driven Development
+
+## Selenium WebDriver
+Testes de UI para aplicação web com Selenium
