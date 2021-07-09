@@ -38,7 +38,7 @@ namespace Alura.LeilaoOnline.Selenium
         }
 
         [Theory]
-        [InlineData("", "ana@mail.com", "academia", "academia")]
+        [InlineData("a@", "a@mail.com", "academia", "aca3demia")]
         [InlineData("Leonardo", "leo", "123", "123")]
         [InlineData("Leonardo", "leo@mail.com", "123", "1234")]
         public void QuandoInfoInvalidasDeveManterNoRegistro(string nome, string email, string senha, string confSenha)
@@ -52,6 +52,20 @@ namespace Alura.LeilaoOnline.Selenium
 
             //assert
             Assert.Contains("section-registro", driver.PageSource);
+        }
+
+        [Fact]
+        public void QuandoNomeEmBrancoDeveMostrarMensagemErro()
+        {
+            //arrange
+            driver.Navigate().GoToUrl("http://localhost:5000/");
+
+            //act 
+            Registrar();
+
+            //assert
+            IWebElement elemento = driver.FindElement(By.CssSelector("span.msg-erro[data-valmsg-for=Nome]"));
+            Assert.True(elemento.Displayed);
         }
 
         #region métodos privados
