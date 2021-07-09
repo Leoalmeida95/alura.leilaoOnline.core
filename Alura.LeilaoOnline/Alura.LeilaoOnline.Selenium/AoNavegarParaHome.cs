@@ -10,7 +10,8 @@ using Xunit;
 
 namespace Alura.LeilaoOnline.Selenium
 {
-    public class AoNavegarParaHome : IClassFixture<TestFixture>
+    [Collection("Chrome Drive")]
+    public class AoNavegarParaHome
     {
         private IWebDriver driver;
 
