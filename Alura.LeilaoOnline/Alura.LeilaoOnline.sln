@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C80543F3-648E-4D63-8340-D1B47D3131C8}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alura.LeilaoOnline.WebApp",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alura.LeilaoOnline.Dados", "Alura.LeilaoOnline.Dados\Alura.LeilaoOnline.Dados.csproj", "{7C733F15-4F1C-497A-B81E-DD4272EECF64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alura.LeilaoOnline.Selenium", "Alura.LeilaoOnline.Selenium\Alura.LeilaoOnline.Selenium.csproj", "{5AD89916-8A59-476D-AF20-0D7C006DFAD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alura.LeilaoOnline.Selenium", "Alura.LeilaoOnline.Selenium\Alura.LeilaoOnline.Selenium.csproj", "{5AD89916-8A59-476D-AF20-0D7C006DFAD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
