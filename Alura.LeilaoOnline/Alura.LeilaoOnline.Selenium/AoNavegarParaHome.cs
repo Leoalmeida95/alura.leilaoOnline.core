@@ -1,5 +1,6 @@
 using Alura.LeilaoOnline.Selenium.Fixtures;
 using Alura.LeilaoOnline.Selenium.Helpers;
+using Alura.LeilaoOnline.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -15,20 +16,22 @@ namespace Alura.LeilaoOnline.Selenium
     public class AoNavegarParaHome
     {
         private IWebDriver driver;
+        private RegistroPO registroPO;
 
         //Setup do teste
         public AoNavegarParaHome(TestFixture _fixture)
         {
             driver = _fixture.driver;
+            registroPO = new RegistroPO(driver);
         }
 
         [Fact]
         public void QuandoChromeAbertoDeveMostrarLeilõesNoTitulo()
         {
             //arrange
-            
+
             //act 
-            driver.Navigate().GoToUrl("http://localhost:5000/");
+            registroPO.Visitar();
 
             //assert
             Assert.Contains("Leilões", driver.Title);
@@ -40,7 +43,7 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            driver.Navigate().GoToUrl("http://localhost:5000/");
+            registroPO.Visitar();
 
             //assert
             Assert.Contains("Próximos Leilões", driver.PageSource);
@@ -52,12 +55,11 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            driver.Navigate().GoToUrl("http://localhost:5000/");
+            registroPO.Visitar();
 
             //assert
             var form = driver.FindElement(By.TagName("form"));
             var spans = form.FindElements(By.TagName("span"));
-
             spans.ToList().ForEach(s => Assert.True(string.IsNullOrEmpty(s.Text)));
         }
     }

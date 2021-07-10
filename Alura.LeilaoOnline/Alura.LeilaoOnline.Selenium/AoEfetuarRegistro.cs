@@ -35,8 +35,7 @@ namespace Alura.LeilaoOnline.Selenium
             registroPO.SubmeteFormulario();
 
             //assert
-            var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("obrigado")));
+            registroPO.Esperar();
             Assert.Contains("Obrigado", driver.PageSource);
         }
 
@@ -67,8 +66,7 @@ namespace Alura.LeilaoOnline.Selenium
             registroPO.SubmeteFormulario();
 
             //assert
-            IWebElement elemento = driver.FindElement(By.CssSelector("span.msg-erro[data-valmsg-for=Nome]"));
-            Assert.Equal("The Nome field is required.", elemento.Text);
+            Assert.Equal("The Nome field is required.", registroPO.NomeMensagemErro);
         }
 
         [Fact]
