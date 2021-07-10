@@ -1,4 +1,5 @@
 ﻿using Alura.LeilaoOnline.Selenium.Fixtures;
+using Alura.LeilaoOnline.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -12,11 +13,13 @@ namespace Alura.LeilaoOnline.Selenium
     public class AoEfetuarRegistro
     {
         private IWebDriver driver;
+        private RegistroPO registroPO;
 
         //Setup do teste
         public AoEfetuarRegistro(TestFixture _fixture)
         {
             driver = _fixture.driver;
+            registroPO = new RegistroPO(driver);
         }
 
         [Theory]
@@ -25,11 +28,11 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoInfoValidasDeveIrApaginaAgradecimento(string nome, string email, string senha, string confSenha)
         {
             //arrange
-            driver.Navigate().GoToUrl("http://localhost:5000/");
-            preencherFormulario(nome, email, senha, confSenha);
+            registroPO.Visitar();
+            registroPO.PreencherFormulario(nome, email, senha, confSenha);
 
             //act 
-            Registrar();
+            registroPO.SubmeteFormulario();
 
             //assert
             var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
@@ -44,11 +47,11 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoInfoInvalidasDeveManterNoRegistro(string nome, string email, string senha, string confSenha)
         {
             //arrange
-            driver.Navigate().GoToUrl("http://localhost:5000/");
-            preencherFormulario(nome, email, senha, confSenha);
+            registroPO.Visitar();
+            registroPO.PreencherFormulario(nome, email, senha, confSenha);
 
             //act 
-            Registrar();
+            registroPO.SubmeteFormulario();
 
             //assert
             Assert.Contains("section-registro", driver.PageSource);
@@ -58,35 +61,28 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoNomeEmBrancoDeveMostrarMensagemErro()
         {
             //arrange
-            driver.Navigate().GoToUrl("http://localhost:5000/");
+            registroPO.Visitar();
 
             //act 
-            Registrar();
+            registroPO.SubmeteFormulario();
 
             //assert
             IWebElement elemento = driver.FindElement(By.CssSelector("span.msg-erro[data-valmsg-for=Nome]"));
-            Assert.True(elemento.Displayed);
+            Assert.Equal("The Nome field is required.", elemento.Text);
         }
 
-        #region métodos privados
-        private void preencherFormulario(string nome, string email, string senha, string confSenha)
+        [Fact]
+        public void QuandoEmailInvalidoDeveMostrarMensagemErro()
         {
-            var inputNome = driver.FindElement(By.Id("Nome"));
-            var inputEmail = driver.FindElement(By.Id("Email"));
-            var inputSenha = driver.FindElement(By.Id("Password"));
-            var inputConfirmSenha = driver.FindElement(By.Id("ConfirmPassword"));
+            //arrange
+            registroPO.Visitar();
+            registroPO.PreencherFormulario(string.Empty, "leo", string.Empty, string.Empty);
 
-            inputNome.SendKeys(nome);
-            inputEmail.SendKeys(email);
-            inputSenha.SendKeys(senha);
-            inputConfirmSenha.SendKeys(confSenha);
-        }
+            //act 
+            registroPO.SubmeteFormulario();
 
-        private void Registrar()
-        {
-            var btnRegistro = driver.FindElement(By.Id("btnRegistro"));
-            btnRegistro.Click();
+            //assert
+            Assert.Equal("Please enter a valid email address.", registroPO.EmailMensagemErro);
         }
-        #endregion
     }
 }
