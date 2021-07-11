@@ -14,7 +14,7 @@
         <h5>@Model.ParaTexto()</h5>
         <p>Começa em @comecaEm.Humanize().</p>
     </div>
-    <div class="center-align brown-text text-darken-3">
+    <div class="center-align brown-text text-darken-3" data-idLeilao="@leilao.Id" data-idInteressada="@usuarioLogado.Interessada.Id">
         <h6>Valor Inicial</h6>
         <h5>@leilao.ValorInicial.ToString("C", CultureInfo.CurrentCulture)</h5>
         @if (usuarioLogado != null)
@@ -22,15 +22,15 @@
             if (leilao.SendoSeguido)
             {
                 <p>Você já está seguindo esse leilão.</p>
-                <button id="btnAbandonarLeilao" class="btn waves-effect waves-light brown darken-3 btn-flat white-text">
-                    Deixar de Seguir
+                <button class="btn waves-effect waves-light brown darken-3 btn-flat white-text abandonar">
+                    Abandonar!
                 </button>
             }
             else
             {
                 <p>Você não está seguindo esse leilão.</p>
-                <button id="btnSeguirLeilao" class="btn waves-effect waves-light brown darken-3 btn-flat white-text">
-                    Quero Seguir!
+                <button class="btn waves-effect waves-light brown darken-3 btn-flat white-text seguir">
+                    Seguir!
                 </button>
             }
 

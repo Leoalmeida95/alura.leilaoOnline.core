@@ -63,45 +63,8 @@ function readPosterURL(input) {
 
         });
 
-        $('.seguir').on('click', e => {
-            e.preventDefault();
-            const link = $(e.target).parent();
-
-            seguirLeilao(
-                $(link).data(),
-                function () {
-                    M.toast({ html: 'Agora você está seguindo o leilão!' });
-                    //mudar o ícone e a classe do link
-                    e.target.textContent = 'star';
-                    $(link).removeClass("seguir");
-                    $(link).addClass("abandonar yellow-text text-darken-4");
-                }
-            );
-        });
-
-        //ação de deixar de seguir um leilão
-        $('.abandonar').on('click', e => {
-            e.preventDefault();
-
-            const link = $(e.target).parent();
-
-            //montar os dados
-            //chamar a função abandonarLeilao com funções de sucesso e erro
-
-            //enviar requisição para deixar de seguir o leilão
-            abandonarLeilao(
-                $(link).data(),
-                function () {
-                    console.log('leilão foi abandonado!');
-                    M.toast({ html: 'Você deixou de seguir o leilão!' });
-                    //mudar o ícone e a classe do link
-                    e.target.textContent = 'star_border';
-                    $(link).removeClass("abandonar yellow-text text-darken-4");
-                    $(link).addClass("seguir white-text");
-                }
-            );
-
-        });
+        $('.seguir').one('click', clickSeguir);
+        $('.abandonar').one('click', clickAbandonar);
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space

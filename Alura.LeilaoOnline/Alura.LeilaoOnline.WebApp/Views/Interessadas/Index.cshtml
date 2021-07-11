@@ -2,9 +2,39 @@
 @{
     ViewData["Title"] = "Dashboard";
 }
-
 <div class="container">
     <div class="row">
+        @if (Model.LeiloesPesquisados != null && Model.LeiloesPesquisados.Count() > 0)
+        {
+            <div class="col s12">
+                <div class="card leiloes-pesquisados">
+                    <div class="card-content">
+                        <span class="card-title">Resultado da pesquisa</span>
+                        <table class="striped">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Categoria</th>
+                                    <th>Situação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var leilao in Model.LeiloesPesquisados)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-controller="Home" asp-action="Detalhes" asp-route-id="@leilao.Id">@leilao.Titulo</a>
+                                        </td>
+                                        <td>@leilao.Categoria</td>
+                                        <td>@leilao.Estado.ParaTexto()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
         <div class="col s12 m8">
             <div class="card minhas-ofertas">
                 <div class="card-content">
@@ -48,6 +78,15 @@
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Pesquisar Leilões</span>
+                    <partial name="PesquisaLeiloes" model="new PesquisaLeiloesViewModel()" />
+                </div>
+            </div>
+            <!--div.card-->
         </div>
     </div>
 </div>

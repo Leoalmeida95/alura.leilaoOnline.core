@@ -31,12 +31,16 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = _repo.Todos.First(u => u.Email == model.Login && u.Senha == model.Password);
+                var usuario = _repo.Todos.FirstOrDefault(u => u.Email == model.Login && u.Senha == model.Password);
                 if (usuario != null)
                 {
                     usuario = _repo.BuscarPorId(usuario.Id);
                     //autenticar
                     HttpContext.Session.Set<Usuario>("usuarioLogado", usuario);
+                    if (usuario.Interessada == null)
+                    {
+                        return RedirectToAction("Index", "Leiloes");
+                    }
                     return RedirectToAction("Index", "Interessadas");
                 }
                 ModelState.AddModelError("usuarioInvalido", "Usuário não encontrado");

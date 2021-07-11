@@ -35,7 +35,7 @@ namespace Alura.LeilaoOnline.Selenium
             registroPO.SubmeteFormulario();
 
             //assert
-            registroPO.Esperar();
+            //registroPO.Esperar();
             Assert.Contains("Obrigado", driver.PageSource);
         }
 

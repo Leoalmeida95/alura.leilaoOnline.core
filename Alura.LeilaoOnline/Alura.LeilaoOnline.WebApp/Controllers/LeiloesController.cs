@@ -40,9 +40,11 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
             _env = environment;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(Paginacao paginacao)
         {
-            var leiloes = _repo.Todos.Select(l => l.ToViewModel());
+            var leiloes = _repo.Todos
+                .Select(l => l.ToViewModel())
+                .ToListaPaginada(paginacao);
             return View(leiloes);
         }
 

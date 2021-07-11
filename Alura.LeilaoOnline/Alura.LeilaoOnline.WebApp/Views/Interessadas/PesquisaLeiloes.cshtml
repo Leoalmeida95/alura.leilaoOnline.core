@@ -1,0 +1,26 @@
+﻿@model PesquisaLeiloesViewModel
+<form asp-controller="Interessadas" asp-action="Index">
+    <div class="input-field">
+        <select multiple name="categorias">
+            <option value="Automóveis" selected>Automóveis</option>
+            <option value="Arte e Pintura" selected>Arte</option>
+            <option value="Item de Colecionador" selected>Coleções</option>
+        </select>
+        <label>Por categoria</label>
+    </div>
+    <div class="input-field">
+        <input id="termo" type="text" name="termo" value="" />
+        <label for="termo">Por título</label>
+    </div>
+    <div class="input-field">
+        <div class="switch">
+            <label>
+                Todos
+                <input type="checkbox" name="andamento">
+                <span class="lever"></span>
+                Apenas em andamento
+            </label>
+        </div>
+    </div>
+    <button class="btn waves-effect waves-light">Pesquisar</button>
+</form>

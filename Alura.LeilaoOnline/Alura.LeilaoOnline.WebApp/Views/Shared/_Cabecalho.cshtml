@@ -21,13 +21,17 @@
                     @if (usuarioLogado == null)
                     {
                         <li><a asp-controller="Autenticacao" asp-action="Login">Login</a></li>
-                    } else {
-                        <li><a asp-controller="Interessadas" asp-action="Index">Dashboard</a></li>
+                    }
+                    else
+                    {
                         if (usuarioLogado.Interessada == null)
-	                    {
-                        <li><a asp-controller="Leiloes" asp-action="Index">Leilões</a></li>
-                        <li><a asp-controller="Usuarios" asp-action="Index">Usuários</a></li>
-	                    }
+                        {
+                            <li><a asp-controller="Leiloes" asp-action="Index">Leilões</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-controller="Interessadas" asp-action="Index">Dashboard</a></li>
+                        }
                         <li class="center-align">
                             <a id="meu-perfil" class="dropdown-trigger" href="#" data-target="dropdown1">
                                 <i class="material-icons large">account_circle</i>

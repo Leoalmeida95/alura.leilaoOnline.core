@@ -7,5 +7,6 @@ namespace Alura.LeilaoOnline.WebApp.Models
     {
         public IEnumerable<Lance> MinhasOfertas { get; set; }
         public IEnumerable<Leilao> LeiloesFavoritos { get; set; }
+        public IEnumerable<Leilao> LeiloesPesquisados { get; set; }
     }
 }
