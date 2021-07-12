@@ -13,7 +13,9 @@ namespace Alura.LeilaoOnline.Selenium.Fixtures
         //Setup
         public TestFixture()
         {
-            driver = TestHelpers.ObterDriver();
+            var driver = TestHelpers.ObterDriver();
+            driver.Manage().Window.Maximize();
+            this.driver = driver;
         }
 
         //TearDown
