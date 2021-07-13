@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
         private By byInputTitulo;
         private By byInputDescricao;
         private By byClasseCategoria;
+        private By byInputCategoria;
         private By byInputValorInicial;
         private By byInputImagem;
         private By byInputInicioPregao;
@@ -20,12 +22,22 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
         private By byBotaoSalvar;
         private By btTagSpan;
 
+        public IEnumerable<string> Categorias 
+        { 
+            get
+            {
+                var elementoCategoria = new SelectElement(_driver.FindElement(byInputCategoria));
+                return elementoCategoria.Options.Where(a=>a.Enabled).Select(x=>x.Text);
+            }
+        }
+
         public LeilaoPO(IWebDriver driver)
         {
             _driver = driver;
             byInputTitulo = By.Id("Titulo");
             byInputDescricao = By.Id("Descricao");
             byClasseCategoria = By.ClassName("select-dropdown");
+            byInputCategoria = By.Id("Categoria");
             byInputValorInicial = By.Id("ValorInicial");
             byInputImagem = By.Id("ArquivoImagem");
             byInputInicioPregao = By.Id("InicioPregao");
