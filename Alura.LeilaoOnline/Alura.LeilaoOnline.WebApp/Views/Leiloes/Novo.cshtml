@@ -1,4 +1,4 @@
-﻿@model Alura.LeilaoOnline.WebApp.Models.LeilaoViewModel
+﻿@model LeilaoViewModel
 @{
     ViewData["Title"] = "Novo Leilão";
 }
@@ -17,19 +17,19 @@
                     </div>
                     <!--div.input-field titulo-->
                     <div class="input-field">
-                        <textarea asp-for="Descricao" class="validate materialize-textarea" data-length="120"></textarea>
+                        <textarea asp-for="Descricao" class="validate materialize-textarea"></textarea>
                         <label asp-for="Descricao"></label>
                         <span class="helper-text msg-erro" asp-validation-for="Descricao"></span>
                     </div>
                     <!--div.input-field descricao-->
                     <div class="row">
                         <div class="input-field col s6">
-                            <select asp-for="Categoria">
+                            <select asp-for="Categoria" class="browser-default">
+                                <option value="" selected disabled>Escolha a categoria</option>
                                 <option value="Automóveis">Automóveis</option>
                                 <option value="Item de Colecionador">Item de Colecionador</option>
                                 <option value="Arte e Pintura">Arte e Pintura</option>
                             </select>
-                            <label asp-for="Categoria"></label>
                             <span class="helper-text msg-erro" asp-validation-for="Categoria"></span>
                         </div>
                         <!--div.input-field categoria-->

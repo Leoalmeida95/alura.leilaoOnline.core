@@ -59,8 +59,7 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
             _driver.FindElement(byInputImagem).SendKeys(imagem);
             _driver.FindElement(byInputInicioPregao).SendKeys(inicio.ToString());
             _driver.FindElement(byInputTerminoPregao).SendKeys(termino.ToString());
-            _driver.FindElement(byClasseCategoria).Click();
-            _driver.FindElements(btTagSpan).Where(s => s.Text == categoria).First().Click();
+            _driver.FindElement(byInputCategoria).SendKeys(categoria);
         }
 
         public void SubmeteFormulario()

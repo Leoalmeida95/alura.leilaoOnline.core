@@ -7,7 +7,7 @@
     Usuario usuarioLogado = ViewData["UsuarioLogado"] as Usuario;
     TimeSpan terminaEm = DateTime.Now - leilao.InicioPregao;
     LanceViewModel lanceModel = null;
-    if (usuarioLogado != null)
+    if (Usuario.EhInteressada(usuarioLogado))
     {
         lanceModel = new LanceViewModel
         {

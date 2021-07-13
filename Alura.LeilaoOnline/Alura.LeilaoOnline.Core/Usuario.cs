@@ -15,5 +15,10 @@ namespace Alura.LeilaoOnline.Core
         public string Senha { get; set; }
 
         public Interessada Interessada { get; set; }
+
+        public static bool EhInteressada(Usuario usuario)
+        {
+            return (usuario != null) && (usuario.Interessada != null);
+        }
     }
 }

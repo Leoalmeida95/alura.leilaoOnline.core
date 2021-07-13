@@ -31,8 +31,9 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            registroPO.Visitar();
+            driver.Navigate().GoToUrl("http://localhost:5000/Home/Categoria");
 
+            var a = driver.Title;
             //assert
             Assert.Contains("Leilões", driver.Title);
         }
@@ -43,7 +44,7 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            registroPO.Visitar();
+            driver.Navigate().GoToUrl("http://localhost:5000/Home/Categoria");
 
             //assert
             Assert.Contains("Próximos Leilões", driver.PageSource);
@@ -55,7 +56,7 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            registroPO.Visitar();
+            driver.Navigate().GoToUrl("http://localhost:5000/Home/Categoria");
 
             //assert
             var form = driver.FindElement(By.TagName("form"));

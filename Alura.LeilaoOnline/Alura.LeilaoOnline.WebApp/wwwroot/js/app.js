@@ -1,4 +1,33 @@
-﻿function clickSeguir(e) {
+﻿function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+function darLance(e) {
+    e.preventDefault();
+
+    const lanceOfertado = $('#Valor').val();
+
+    sleep(5000).then(() => {
+        $.post(
+            '/Interessadas/OfertaLance',
+            $('#formDarLance').serialize(),
+            function () {
+                console.log('lance ofertado!');
+                M.toast({ html: 'Lance ofertado com sucesso!' });
+
+                const formatter = new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2
+                });
+
+                $("#lanceAtual").text(formatter.format(lanceOfertado));
+            }
+        );
+    });
+}
+
+function clickSeguir(e) {
     e.preventDefault();
     const link = $(e.target).parent();
 

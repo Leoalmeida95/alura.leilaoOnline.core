@@ -4,6 +4,12 @@
     LeilaoViewModel leilao = ViewData["Leilao"] as LeilaoViewModel;
     Usuario usuarioLogado = ViewData["UsuarioLogado"] as Usuario;
     TimeSpan comecaEm = DateTime.Now - leilao.InicioPregao;
+    int idInteressada = -1;
+    bool interessadaLogada = (usuarioLogado != null && usuarioLogado.Interessada != null);
+    if (interessadaLogada)
+    {
+        idInteressada = usuarioLogado.Interessada.Id;
+    }
 }
 
 <div class="card estado">
@@ -14,10 +20,10 @@
         <h5>@Model.ParaTexto()</h5>
         <p>Começa em @comecaEm.Humanize().</p>
     </div>
-    <div class="center-align brown-text text-darken-3" data-idLeilao="@leilao.Id" data-idInteressada="@usuarioLogado.Interessada.Id">
+    <div class="center-align brown-text text-darken-3" data-idLeilao="@leilao.Id" data-idInteressada="@idInteressada">
         <h6>Valor Inicial</h6>
         <h5>@leilao.ValorInicial.ToString("C", CultureInfo.CurrentCulture)</h5>
-        @if (usuarioLogado != null)
+        @if (interessadaLogada)
         {
             if (leilao.SendoSeguido)
             {

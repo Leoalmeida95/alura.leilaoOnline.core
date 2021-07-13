@@ -32,7 +32,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
 
             var usuarioLogado = HttpContext.Session.Get<Usuario>("usuarioLogado");
 
-            if (usuarioLogado != null)
+            if (usuarioLogado != null && Usuario.EhInteressada(usuarioLogado))
             {
                 var interessada = _repoInt
                     .BuscarPorId(usuarioLogado.Interessada.Id);
@@ -41,9 +41,13 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
                         .Favoritos
                         .Select(f => f.IdLeilao)
                         .Any(id => id == l.Id));
-            }
 
-            return View(proximosLeiloes);
+                return View(proximosLeiloes);
+            }
+            else
+            {
+                return RedirectToAction("Categoria");
+            }
         }
 
         [HttpGet]
@@ -54,7 +58,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
             {
                 var usuarioLogado = HttpContext.Session.Get<Usuario>("usuarioLogado");
 
-                if (usuarioLogado != null)
+                if (Usuario.EhInteressada(usuarioLogado))
                 {
                     var interessada = _repoInt
                         .BuscarPorId(usuarioLogado.Interessada.Id);
