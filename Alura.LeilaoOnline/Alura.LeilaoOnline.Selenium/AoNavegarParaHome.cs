@@ -1,13 +1,7 @@
 using Alura.LeilaoOnline.Selenium.Fixtures;
-using Alura.LeilaoOnline.Selenium.Helpers;
 using Alura.LeilaoOnline.Selenium.PageObjects;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using WebDriverManager.DriverConfigs.Impl;
 using Xunit;
 
 namespace Alura.LeilaoOnline.Selenium
@@ -16,13 +10,13 @@ namespace Alura.LeilaoOnline.Selenium
     public class AoNavegarParaHome
     {
         private IWebDriver driver;
-        private RegistroPO registroPO;
+        private HomePO homePO;
 
         //Setup do teste
         public AoNavegarParaHome(TestFixture _fixture)
         {
             driver = _fixture.driver;
-            registroPO = new RegistroPO(driver);
+            homePO = new HomePO(driver);
         }
 
         [Fact]
@@ -31,9 +25,8 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            driver.Navigate().GoToUrl("http://localhost:5000/Home/Categoria");
+            homePO.Visitar();
 
-            var a = driver.Title;
             //assert
             Assert.Contains("Leilões", driver.Title);
         }
@@ -44,7 +37,7 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            driver.Navigate().GoToUrl("http://localhost:5000/Home/Categoria");
+            homePO.Visitar();
 
             //assert
             Assert.Contains("Próximos Leilões", driver.PageSource);
@@ -56,7 +49,7 @@ namespace Alura.LeilaoOnline.Selenium
             //arrange
 
             //act 
-            driver.Navigate().GoToUrl("http://localhost:5000/Home/Categoria");
+            homePO.Visitar();
 
             //assert
             var form = driver.FindElement(By.TagName("form"));
