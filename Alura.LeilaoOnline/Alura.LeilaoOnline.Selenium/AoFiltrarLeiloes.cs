@@ -32,10 +32,10 @@ namespace Alura.LeilaoOnline.Selenium
             loginPO.SubmeteFormulario();
 
             //act
-            dashPO.PesquisarLeiloes(new List<string>() { "Arte", "Automóveis" });
+            dashPO.PesquisarLeiloes(new List<string>() { "Arte", "Automóveis" }, string.Empty, true);
 
             //assert
-            //Assert.Equal(3, leilaoPO.Categorias.Count());
+            Assert.Contains("Resultado da pesquisa", driver.PageSource);
         }
     }
 }
