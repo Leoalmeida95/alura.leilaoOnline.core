@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Alura.LeilaoOnline.Selenium
+namespace Alura.LeilaoOnline.Selenium.Tests
 {
     [Collection("Chrome Drive")]
     public class AoEfetuarLogout
@@ -26,12 +26,10 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoLoginValiadoDeveIrParaHomeNaoLogada()
         {
             //arrange
-            loginPO.Visitar();
-            loginPO.PreencherFormulario("leo@mail.com", "123");
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("leo@mail.com", "123");
 
             //act
-            dashPO.EfetuarLogout();
+            dashPO.Menu.EfetuarLogout();
 
             //assert
             Assert.Contains("Próximos Leilões", driver.PageSource);

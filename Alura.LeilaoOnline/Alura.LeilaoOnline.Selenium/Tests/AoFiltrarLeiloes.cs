@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Alura.LeilaoOnline.Selenium
+namespace Alura.LeilaoOnline.Selenium.Tests
 {
     [Collection("Chrome Drive")]
     public class AoFiltrarLeiloes
@@ -27,12 +27,10 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoLoginInteressadaDeveMostrarPainelResultado()
         {
             //arrange
-            loginPO.Visitar();
-            loginPO.PreencherFormulario("leo@mail.com", "123");
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("leo@mail.com", "123");
 
             //act
-            dashPO.PesquisarLeiloes(new List<string>() { "Arte", "Automóveis" }, string.Empty, true);
+            dashPO.Filtro.PesquisarLeiloes(new List<string>() { "Arte", "Automóveis" }, string.Empty, true);
 
             //assert
             Assert.Contains("Resultado da pesquisa", driver.PageSource);

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using Xunit;
 
-namespace Alura.LeilaoOnline.Selenium
+namespace Alura.LeilaoOnline.Selenium.Tests
 {
     [Collection("Chrome Drive")]
     public class AoNavegarParaFormNovoLeilao
@@ -28,9 +28,7 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoLoginAdmDeveMostrarTresCategorias()
         {
             //arrange
-            loginPO.Visitar();
-            loginPO.PreencherFormulario("leo@mail.com", "123");
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("leo@mail.com", "123");
 
             //act
             leilaoPO.Visitar();

@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using System.Linq;
 using Xunit;
 
-namespace Alura.LeilaoOnline.Selenium
+namespace Alura.LeilaoOnline.Selenium.Tests
 {
     [Collection("Chrome Drive")]
     public class AoNavegarParaHome

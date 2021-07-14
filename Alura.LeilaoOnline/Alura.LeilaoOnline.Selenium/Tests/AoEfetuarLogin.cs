@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Alura.LeilaoOnline.Selenium
+namespace Alura.LeilaoOnline.Selenium.Tests
 {
     [Collection("Chrome Drive")]
     public class AoEfetuarLogin
@@ -24,25 +24,19 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoCredenciaisValidasDeveIrParaDashboard()
         {
             //arrange
-            loginPO.Visitar();
-            loginPO.PreencherFormulario("leo@mail.com", "123");
-
             //act
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("leo@mail.com", "123");
 
             //assert
             Assert.Contains("Dashboard", driver.Title);
         }
 
         [Fact]
-        public void QuandoCredenciaisInalidasDeveContinuarLogin()
+        public void QuandoCredenciaisInvalidasDeveContinuarLogin()
         {
             //arrange
-            loginPO.Visitar();
-            loginPO.PreencherFormulario("leo@mail.com", "123444");
-
             //act
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("leo@mail.com", "123444");
 
             //assert
             Assert.Contains("Login", driver.PageSource);

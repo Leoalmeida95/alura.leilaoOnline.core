@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using System;
 using Xunit;
 
-namespace Alura.LeilaoOnline.Selenium
+namespace Alura.LeilaoOnline.Selenium.Tests
 {
     [Collection("Chrome Drive")]
     public class AoCriarLeilao
@@ -25,9 +25,7 @@ namespace Alura.LeilaoOnline.Selenium
         public void QuandoLoginAdminEInfoValidasDeveCadastrarLeilao(string titulo, string descricao, string categoria, double valor, string imagem, string inicio, string termino)
         {
             //arrange
-            loginPO.Visitar();
-            loginPO.PreencherFormulario("leo@mail.com", "123");
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("leo@mail.com", "123");
 
             leilaoPO.Visitar();
             leilaoPO.PreencherFormulario(titulo, descricao, categoria, valor, imagem, Convert.ToDateTime(inicio), Convert.ToDateTime(termino));

@@ -23,9 +23,7 @@ namespace Alura.LeilaoOnline.Selenium.Tests
         public void QuandoLoginInteressadaDeveAtualizarLance()
         {
             //arrange
-            loginPO.Visitar();
-            loginPO.PreencherFormulario("leo@mail.com", "123");
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("leo@mail.com", "123");
 
             detalheLeilaoPO.Visitar(1);
 
