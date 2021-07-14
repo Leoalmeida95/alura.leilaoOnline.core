@@ -53,9 +53,10 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [HttpGet]
         public IActionResult Detalhes(int id)
         {
-            var leilao = _repo.BuscarPorId(id).ToViewModel();
-            if (leilao != null)
+            var resultLeilao = _repo.BuscarPorId(id);
+            if (resultLeilao != null)
             {
+                var leilao = resultLeilao.ToViewModel();
                 var usuarioLogado = HttpContext.Session.Get<Usuario>("usuarioLogado");
 
                 if (Usuario.EhInteressada(usuarioLogado))
