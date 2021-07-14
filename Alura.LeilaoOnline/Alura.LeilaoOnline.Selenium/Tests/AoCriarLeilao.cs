@@ -2,8 +2,6 @@
 using Alura.LeilaoOnline.Selenium.PageObjects;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Alura.LeilaoOnline.Selenium
