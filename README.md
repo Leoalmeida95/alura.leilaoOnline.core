@@ -1,5 +1,7 @@
 # Alura - Testes Automatizados
 
+Projetos do Curso da Alura que aplicam testes de UI, Integração e Unidade.
+
 ## Projeto Leilão Online
 
 ### Testes de Unidade
