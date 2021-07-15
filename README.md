@@ -1,6 +1,6 @@
 # Alura - Testes Automatizados
 
-##Projeto Leilão Online
+## Projeto Leilão Online
 
 ### Testes de Unidade
 Testes unitários com xUnit, com práticas ágeis como TDD e Test Driven Development
@@ -8,7 +8,7 @@ Testes unitários com xUnit, com práticas ágeis como TDD e Test Driven Develop
 ### Testes de UI
 Testes de UI para aplicação web com Selenium WebDriver
 
-##Porjeto Coisas A Fazer
+## Projeto Coisas A Fazer
 
 ### Testes de Integração
 - Testes com xUnit e Moq Framework
