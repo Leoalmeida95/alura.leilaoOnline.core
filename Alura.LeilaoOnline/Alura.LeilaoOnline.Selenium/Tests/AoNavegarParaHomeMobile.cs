@@ -16,22 +16,38 @@ namespace Alura.LeilaoOnline.Selenium.Tests
 
         public AoNavegarParaHomeMobile()
         {
-            var options = new ChromeOptions();
-            options.EnableMobileEmulation(new ChromeMobileEmulationDeviceSettings { Width = 400, Height = 800, UserAgent = "Customizada" });
-            driver = TestHelpers.ObterDriver(options);
-            homeNaoLogadaPO = new HomeNaoLogadaPO(driver);
         }
 
         [Fact]
-        public void QuandoLarguraFor400DeveMostrarMenuMobile()
+        public void QuandoLarguraFor992DeveMostrarMenuMobile()
         {
             //arrange
+            var options = new ChromeOptions();
+            options.EnableMobileEmulation(new ChromeMobileEmulationDeviceSettings { Width = 992, Height = 800, UserAgent = "Customizada" });
+            driver = TestHelpers.ObterDriver(options);
+            homeNaoLogadaPO = new HomeNaoLogadaPO(driver);
 
             //act
             homeNaoLogadaPO.Visitar();
 
             //assert
             Assert.True(homeNaoLogadaPO.Menu.MobileVisivel);
+        }
+
+        [Fact]
+        public void QuandoLarguraFor993NaoDeveMostrarMenuMobile()
+        {
+            //arrange
+            var options = new ChromeOptions();
+            options.EnableMobileEmulation(new ChromeMobileEmulationDeviceSettings { Width = 993, Height = 800, UserAgent = "Customizada" });
+            driver = TestHelpers.ObterDriver(options);
+            homeNaoLogadaPO = new HomeNaoLogadaPO(driver);
+
+            //act
+            homeNaoLogadaPO.Visitar();
+
+            //assert
+            Assert.False(homeNaoLogadaPO.Menu.MobileVisivel);
         }
 
         public void Dispose()
