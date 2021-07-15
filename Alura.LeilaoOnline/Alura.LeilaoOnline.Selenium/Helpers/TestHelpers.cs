@@ -8,10 +8,10 @@ namespace Alura.LeilaoOnline.Selenium.Helpers
 {
     public static class TestHelpers
     {
-        public static ChromeDriver ObterDriver()
+        public static ChromeDriver ObterDriver(ChromeOptions options = null)
         {
             new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-            return new ChromeDriver();
+            return options != null ? new ChromeDriver(options) :  new ChromeDriver();
         }
     }
 }
