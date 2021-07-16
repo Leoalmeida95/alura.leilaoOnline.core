@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{99F2C0DF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alura.CoisasAFazer.WebApp", "src\Alura.CoisasAFazer.WebApp\Alura.CoisasAFazer.WebApp.csproj", "{33A3FD7A-FED3-4E79-953C-BE31EC561F7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alura.CoisasAFazer.Testes", "tests\Alura.CoisasAFazer.Testes\Alura.CoisasAFazer.Testes.csproj", "{EDDC167B-E5DB-4EA7-8B99-69A48E1B1ED3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{33A3FD7A-FED3-4E79-953C-BE31EC561F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33A3FD7A-FED3-4E79-953C-BE31EC561F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33A3FD7A-FED3-4E79-953C-BE31EC561F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDDC167B-E5DB-4EA7-8B99-69A48E1B1ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDDC167B-E5DB-4EA7-8B99-69A48E1B1ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDDC167B-E5DB-4EA7-8B99-69A48E1B1ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDDC167B-E5DB-4EA7-8B99-69A48E1B1ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{DA69B76E-D68C-4D09-9B34-BE428CE222D7} = {670522DB-C1A6-48AD-8B58-DEAD356C4010}
 		{40D8BD60-FC11-454A-8E2B-03AA801E592E} = {670522DB-C1A6-48AD-8B58-DEAD356C4010}
 		{33A3FD7A-FED3-4E79-953C-BE31EC561F7A} = {670522DB-C1A6-48AD-8B58-DEAD356C4010}
+		{EDDC167B-E5DB-4EA7-8B99-69A48E1B1ED3} = {99F2C0DF-46A5-4E43-95C1-CB0821DA7284}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9379DB86-5F18-4A1A-851A-43F7BF219755}
