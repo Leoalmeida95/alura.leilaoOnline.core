@@ -16,13 +16,13 @@ namespace Alura.CoisasAFazer.Testes
         {
             //arrange
             var titulo = "Estudar Testes";
-            var comando = new CadastraTarefa(titulo, new Categoria("Estudo"), new DateTime(2019, 12, 31));
+            var comando = new CadastraTarefa(titulo, new Categoria(1, "Estudo"), new DateTime(2019, 12, 31));
 
             var options = new DbContextOptionsBuilder<DbTarefasContext>()
                                 .UseInMemoryDatabase("DBTarefasContext")
                                 .Options;
             var context = new DbTarefasContext(options);
-            var repo = new RepositorioFake();
+            var repo = new RepositorioTarefa(context);
             var handler = new CadastraTarefaHandler(repo);
 
             //act
