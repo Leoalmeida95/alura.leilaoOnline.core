@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using Xunit;
+using Moq;
 
 namespace Alura.CoisasAFazer.Testes
 {
@@ -30,6 +31,27 @@ namespace Alura.CoisasAFazer.Testes
 
             //assert
             Assert.Single(repo.ObtemTarefas(a=>a.Titulo == titulo).ToList());
+        }
+
+        [Fact]
+        public void QuandoExceptionForLancadaResultadoIsSuccessDeveSerFalse()
+        {
+            //arrange
+            var comando = new CadastraTarefa("Estudar Testes", new Categoria(1, "Estudo"), new DateTime(2019, 12, 31));
+
+            var mock = new Mock<IRepositorioTarefas>();
+            mock
+                .Setup(r => r.IncluirTarefas(It.IsAny<Tarefa[]>()))
+                .Throws(new Exception("Houve um erro ao incluir a tarefa"));
+            var repo = mock.Object;
+
+            var handler = new CadastraTarefaHandler(repo);
+
+            //act
+            CommandResult resultado = handler.Execute(comando);
+
+            //assert
+            Assert.False(resultado.IsSuccess);        
         }
     }
 }
