@@ -87,5 +87,48 @@ namespace Alura.CoisasAFazer.Testes
                                             It.IsAny<Func<object, Exception, string>>() //funcao que converte objeto + excpt > string
                                        ),Times.Once());
         }
+
+        [Fact]
+        public void QuandoTarefaComInfoValidasDeveLogar()
+        {
+            //arrange
+            var titulo = "Estudar Testes";
+            var comando = new CadastraTarefa(titulo, new Categoria(1, "Estudo"), new DateTime(2019, 12, 31));
+
+            var mockLogger = new Mock<ILogger<CadastraTarefaHandler>>();
+
+
+            LogLevel levelCapturado = LogLevel.Error;
+            string mensagemCapturada = string.Empty;
+
+            CapturaMensagemLog captura = (level, eventId, state, exception, func) =>
+            {
+                levelCapturado = level;
+                mensagemCapturada = func(state, exception);
+            };
+
+            mockLogger.Setup(l => l.Log(
+                                            It.IsAny<LogLevel>(),
+                                            It.IsAny<EventId>(),
+                                            It.IsAny<object>(),
+                                            It.IsAny<Exception>(),
+                                            It.IsAny<Func<object, Exception, string>>()
+                                       )).Callback(captura);
+
+            var mock = new Mock<IRepositorioTarefas>();
+
+            var handler = new CadastraTarefaHandler(mock.Object, mockLogger.Object);
+
+            //act
+            handler.Execute(comando);
+
+            //assert
+            Assert.Equal(LogLevel.Debug, levelCapturado);
+            Assert.Contains(titulo, mensagemCapturada);
+        }
+
+        #region
+        delegate void CapturaMensagemLog(LogLevel level, EventId eventId, object state, Exception exception, Func<object, Exception, string> func);
+        #endregion
     }
 }
