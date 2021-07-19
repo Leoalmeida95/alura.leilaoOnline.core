@@ -7,6 +7,8 @@ using System;
 using System.Linq;
 using Xunit;
 using Moq;
+using Castle.Core.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Alura.CoisasAFazer.Testes
 {
@@ -19,12 +21,14 @@ namespace Alura.CoisasAFazer.Testes
             var titulo = "Estudar Testes";
             var comando = new CadastraTarefa(titulo, new Categoria(1, "Estudo"), new DateTime(2019, 12, 31));
 
+            var mock = new Mock<ILogger<CadastraTarefaHandler>>();
+
             var options = new DbContextOptionsBuilder<DbTarefasContext>()
                                 .UseInMemoryDatabase("DBTarefasContext")
                                 .Options;
             var context = new DbTarefasContext(options);
             var repo = new RepositorioTarefa(context);
-            var handler = new CadastraTarefaHandler(repo);
+            var handler = new CadastraTarefaHandler(repo, mock.Object);
 
             //act
             handler.Execute(comando);
@@ -39,19 +43,49 @@ namespace Alura.CoisasAFazer.Testes
             //arrange
             var comando = new CadastraTarefa("Estudar Testes", new Categoria(1, "Estudo"), new DateTime(2019, 12, 31));
 
+            var mockLog = new Mock<ILogger<CadastraTarefaHandler>>();
             var mock = new Mock<IRepositorioTarefas>();
             mock
                 .Setup(r => r.IncluirTarefas(It.IsAny<Tarefa[]>()))
                 .Throws(new Exception("Houve um erro ao incluir a tarefa"));
             var repo = mock.Object;
 
-            var handler = new CadastraTarefaHandler(repo);
+            var handler = new CadastraTarefaHandler(repo, mockLog.Object);
 
             //act
             CommandResult resultado = handler.Execute(comando);
 
             //assert
             Assert.False(resultado.IsSuccess);        
+        }
+
+        [Fact]
+        public void QuandoExceptionForLancadaDeveLogarAMensagemDaException()
+        {
+            //arrange
+            var excpt = new Exception("Houve um erro ao incluir a tarefa");
+            var comando = new CadastraTarefa("Estudar Testes", new Categoria(1, "Estudo"), new DateTime(2019, 12, 31));
+
+            var mockLog = new Mock<ILogger<CadastraTarefaHandler>>();
+            var mock = new Mock<IRepositorioTarefas>();
+            mock
+                .Setup(r => r.IncluirTarefas(It.IsAny<Tarefa[]>()))
+                .Throws(excpt);
+            var repo = mock.Object;
+
+            var handler = new CadastraTarefaHandler(repo, mockLog.Object);
+
+            //act
+            CommandResult resultado = handler.Execute(comando);
+
+            //assert
+            mockLog.Verify(l => l.Log(
+                                            LogLevel.Error, //LogError
+                                            It.IsAny<EventId>(), //identificador evento error
+                                            It.IsAny<object>(), //objeto que será logado
+                                            excpt, //excecao que sera logada
+                                            It.IsAny<Func<object, Exception, string>>() //funcao que converte objeto + excpt > string
+                                       ),Times.Once());
         }
     }
 }
