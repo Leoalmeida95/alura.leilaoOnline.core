@@ -34,6 +34,47 @@ namespace Alura.CoisasAFazer.Testes
         }
 
         [Fact]
+        public void QuandoTarefaComInfoInvalidasNaoDeveIncluirNoBD()
+        {
+            //arrange
+            var comando = new CadastraTarefa("", new Categoria(""), new DateTime(2222, 12, 31));
+
+            var options = new DbContextOptionsBuilder<DbTarefasContext>()
+                                .UseInMemoryDatabase("DBTarefasContext")
+                                .Options;
+            var context = new DbTarefasContext(options);
+            var repo = new RepositorioTarefa(context);
+            var handler = new CadastraTarefaHandler(repo);
+
+            //act
+            handler.Execute(comando);
+
+            //assert
+            Assert.Empty(repo.ObtemTarefas(a => a.Titulo == "").ToList());
+        }
+
+        [Fact]
+        public void QuandoTarefaComInfoInvalidasDeveLancarException()
+        {
+            //arrange
+            var msg = "Título e Categoria da Tarefa não podem ser vazios";
+            var comando = new CadastraTarefa("", new Categoria(""), new DateTime(2222, 12, 31));
+
+            var options = new DbContextOptionsBuilder<DbTarefasContext>()
+                                .UseInMemoryDatabase("DBTarefasContext")
+                                .Options;
+            var context = new DbTarefasContext(options);
+            var repo = new RepositorioTarefa(context);
+            var handler = new CadastraTarefaHandler(repo);
+
+            //act
+            CommandResult resultado = handler.Execute(comando);
+
+            //assert
+            Assert.True(resultado.Mensagem == msg);
+        }
+
+        [Fact]
         public void QuandoExceptionForLancadaResultadoIsSuccessDeveSerFalse()
         {
             //arrange

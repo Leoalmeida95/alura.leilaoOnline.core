@@ -21,6 +21,8 @@ namespace Alura.CoisasAFazer.Services.Handlers
         {
             try
             {
+                if (comando.Titulo == string.Empty || comando.Categoria.Descricao == string.Empty) throw new Exception("Título e Categoria da Tarefa não podem ser vazios");
+
                 var tarefa = new Tarefa
                 (
                     id: 0,
@@ -38,7 +40,7 @@ namespace Alura.CoisasAFazer.Services.Handlers
             }
             catch (Exception e)
             {
-                return new CommandResult(false);
+                return new CommandResult(false, e.Message);
             }
         }
     }
