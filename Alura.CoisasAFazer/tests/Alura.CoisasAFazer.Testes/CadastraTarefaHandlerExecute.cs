@@ -43,12 +43,13 @@ namespace Alura.CoisasAFazer.Testes
             //arrange
             var comando = new CadastraTarefa("", new Categoria(""), new DateTime(2222, 12, 31));
 
+            var mock = new Mock<ILogger<CadastraTarefaHandler>>();
             var options = new DbContextOptionsBuilder<DbTarefasContext>()
                                 .UseInMemoryDatabase("DBTarefasContext")
                                 .Options;
             var context = new DbTarefasContext(options);
             var repo = new RepositorioTarefa(context);
-            var handler = new CadastraTarefaHandler(repo);
+            var handler = new CadastraTarefaHandler(repo, mock.Object);
 
             //act
             handler.Execute(comando);
@@ -64,12 +65,13 @@ namespace Alura.CoisasAFazer.Testes
             var msg = "Título e Categoria da Tarefa não podem ser vazios";
             var comando = new CadastraTarefa("", new Categoria(""), new DateTime(2222, 12, 31));
 
+            var mock = new Mock<ILogger<CadastraTarefaHandler>>();
             var options = new DbContextOptionsBuilder<DbTarefasContext>()
                                 .UseInMemoryDatabase("DBTarefasContext")
                                 .Options;
             var context = new DbTarefasContext(options);
             var repo = new RepositorioTarefa(context);
-            var handler = new CadastraTarefaHandler(repo);
+            var handler = new CadastraTarefaHandler(repo, mock.Object);
 
             //act
             CommandResult resultado = handler.Execute(comando);
