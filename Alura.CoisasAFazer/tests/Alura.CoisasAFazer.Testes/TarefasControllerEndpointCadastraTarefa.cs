@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Alura.CoisasAFazer.Services.Handlers;
 using Alura.CoisasAFazer.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Alura.CoisasAFazer.Core.Models;
 
 namespace Alura.CoisasAFazer.Testes
 {
@@ -39,6 +40,33 @@ namespace Alura.CoisasAFazer.Testes
 
             //assert
             Assert.IsType<NotFoundObjectResult>(retorno);
+        }
+
+        [Fact]
+        public void QuandoTarefaComDadosValidosDeveRetornar200()
+        {
+            //arrange
+            var mockLog = new Mock<ILogger<CadastraTarefaHandler>>();
+
+            var options = new DbContextOptionsBuilder<DbTarefasContext>()
+                    .UseInMemoryDatabase("DBTarefasContext")
+                    .Options;
+            var context = new DbTarefasContext(options);
+            context.Categorias.Add(new Categoria(40, "Estudo"));
+            context.SaveChanges();
+            var repo = new RepositorioTarefa(context);
+
+            var controlador = new TarefasController(repo, mockLog.Object);
+            var model = new CadastraTarefaVM();
+            model.IdCategoria = 40;
+            model.Titulo = "Estudar";
+            model.Prazo = DateTime.Now;
+
+            //act
+            var retorno = controlador.EndpointCadastraTarefa(model);
+
+            //assert
+            Assert.IsType<OkResult>(retorno);
         }
     }
 }
