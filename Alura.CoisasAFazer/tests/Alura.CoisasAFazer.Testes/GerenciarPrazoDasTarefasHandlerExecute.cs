@@ -47,6 +47,29 @@ namespace Alura.CoisasAFazer.Testes
         }
 
         [Fact]
+        public void QuandoTarefasNaoAtrasadasDevePermanecerSeuStatus()
+        {
+            //arrange
+            CriarCategorias();
+            CriarTarefas();
+            var options = new DbContextOptionsBuilder<DbTarefasContext>()
+                                .UseInMemoryDatabase("DBTarefasContext")
+                                .Options;
+            var context = new DbTarefasContext(options);
+            var repo = new RepositorioTarefa(context);
+            repo.IncluirTarefas(tarefas.ToArray());
+
+            var comando = new GerenciaPrazoDasTarefas(new DateTime(2020, 07, 16));
+            var handler = new GerenciaPrazoDasTarefasHandler(repo);
+            //act
+            handler.Execute(comando);
+
+            //assert
+            var tarefasAtrasada = repo.ObtemTarefas(t => t.Status == StatusTarefa.EmAtraso);
+            Assert.Equal(5, tarefasAtrasada.Count());
+        }
+
+        [Fact]
         public void QuandoInvocadoDeveChamarAtualizarTarefasApenasUmaVezIndependenteDaQtdDeTarefas()
         {
             //arrange

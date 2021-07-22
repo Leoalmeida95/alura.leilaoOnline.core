@@ -28,5 +28,23 @@ namespace Alura.CoisasAFazer.Testes
             //assert
             mock.Verify(r => r.ObtemCategoriaPorId(idCategoria), Times.Once());
         }
+
+        [Fact]
+        public void QuandoIdForInexistenteDeveRetornarNull()
+        {
+            //arrange
+            var idCategoria = 900;
+            var comando = new ObtemCategoriaPorId(idCategoria);
+
+            var mock = new Mock<IRepositorioTarefas>();
+            var repo = mock.Object;
+            var handler = new ObtemCategoriaPorIdHandler(repo);
+
+            //act
+            var result = handler.Execute(comando);
+
+            //assert
+            Assert.Null(result);
+        }
     }
 }

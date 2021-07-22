@@ -103,6 +103,25 @@ namespace Alura.CoisasAFazer.Testes
         }
 
         [Fact]
+        public void QuandoRegistroCorretoResultadoIsSuccessDeveSerTrue()
+        {
+            //arrange
+            var comando = new CadastraTarefa("Estudar Testes", new Categoria(1, "Estudo"), new DateTime(2019, 12, 31));
+
+            var mockLog = new Mock<ILogger<CadastraTarefaHandler>>();
+            var mock = new Mock<IRepositorioTarefas>();
+            var repo = mock.Object;
+
+            var handler = new CadastraTarefaHandler(repo, mockLog.Object);
+
+            //act
+            CommandResult resultado = handler.Execute(comando);
+
+            //assert
+            Assert.True(resultado.IsSuccess);
+        }
+
+        [Fact]
         public void QuandoExceptionForLancadaDeveLogarAMensagemDaException()
         {
             //arrange
