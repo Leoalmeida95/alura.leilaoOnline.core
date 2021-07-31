@@ -2,10 +2,10 @@
 
 Projetos do Curso da Alura que aplicam testes de UI, Integração e Unidade.
 
-https://cursos.alura.com.br/course/tdd-csharp-xunit
-https://cursos.alura.com.br/course/selenium-csharp-webdriver
-https://cursos.alura.com.br/course/selenium-csharp-mais-recursos
-https://cursos.alura.com.br/course/csharp-testes-de-integracao-com-xunit-e-moq
+https://cursos.alura.com.br/course/tdd-csharp-xunit  
+https://cursos.alura.com.br/course/selenium-csharp-webdriver  
+https://cursos.alura.com.br/course/selenium-csharp-mais-recursos  
+https://cursos.alura.com.br/course/csharp-testes-de-integracao-com-xunit-e-moq  
 
 ## Projeto Leilão Online
 
